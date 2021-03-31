@@ -1,0 +1,22 @@
+from faceEncodings import getencodes
+import face_recognition as fr
+import cv2
+import os
+import numpy as np
+
+encodedfacesknown, labels = getencodes()
+
+def recognize(face):
+    name = "Unknown"
+    try:
+
+        face = cv2.cvtColor(face, cv2.COLOR_BGR2RGB)
+        encodeface = fr.face_encodings(face)
+        facedist = fr.face_distance(encodedfacesknown, encodeface[0])
+        matches = fr.compare_faces(encodedfacesknown, encodeface[0])
+        matchIndex = np.argmin(facedist)
+        if matches[matchIndex]:
+            name = labels[matchIndex]
+    except:
+        print("Error recognizing face...")
+    return name

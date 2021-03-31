@@ -28,17 +28,4 @@ def face_extraction(img):
             locs.append((startX, startY, endX, endY))
     
     return faces,locs
-#end of fun
-
-'''frame = cv2.imread('test_images/group.jpg')
-faces, locs = face_extraction(frame)
-i = 0
-
-for face, loc in zip(faces, locs):
-    (startX, startY, endX, endY) = loc
-    cv2.rectangle(frame, (endX, endY), (startX, startY), (255, 0, 0), 2)
-    print(face)
-
-cv2.imshow('Image', frame)
-cv2.waitKey(5000)
-cv2.destroyAllWindows()'''
+#end of function
