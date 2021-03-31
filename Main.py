@@ -3,7 +3,7 @@ from face_detect import face_extraction
 from mask_detect import mask_detect
 import numpy as np 
 from recognizer import recognize
-from dbconn import insertInViolator,getUserId
+from dbconn import insertInViolator,getUserName
 cam = cv2.VideoCapture(0)
 
 print('Starting application...')
@@ -17,13 +17,14 @@ while True:
         (startX, startY, endX, endY) = loc
 
         if mask < withoutMask:
-            name = recognize(face)
-            if name != 'Unknown':
-                id = getUserId(name)
-                if id is not None:
-                    id = id[0]
-                    print('Inserting data...')
-                    insertInViolator(id)
+            id = recognize(face)
+            name = ""
+            if id != 0:
+                name = getUserName(id)[0]
+                print('Inserting data...')
+                insertInViolator(id)
+            else:
+                name = "Unknown"
             cv2.rectangle(frame, (startX, startY), (endX, endY), (0, 0, 255), 2)
             cv2.putText(frame, f'Not Safe: {name}', (startX+1, startY-2), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)        
         else:

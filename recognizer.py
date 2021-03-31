@@ -4,10 +4,10 @@ import cv2
 import os
 import numpy as np
 
-encodedfacesknown, labels = getencodes()
+encodedfacesknown = getencodes()
 
 def recognize(face):
-    name = "Unknown"
+    name = 0
     try:
 
         face = cv2.cvtColor(face, cv2.COLOR_BGR2RGB)
@@ -16,7 +16,7 @@ def recognize(face):
         matches = fr.compare_faces(encodedfacesknown, encodeface[0])
         matchIndex = np.argmin(facedist)
         if matches[matchIndex]:
-            name = labels[matchIndex]
+            name = matchIndex
     except:
         print("Error recognizing face...")
-    return name
+    return name+1
