@@ -20,7 +20,6 @@ def insertInViolator(id):
             sql = 'select * from violators where datediff(_datetime, now()) = 0 and uid = %s'
             mycur.execute(sql, (id, ))
             violist = mycur.fetchall()
-            print(len(violist))
             if len(violist) == 0:
                 nowtime = datetime.now()
                 formated_date = nowtime.strftime('%Y-%m-%d %H:%M:%S')
@@ -57,3 +56,10 @@ def getLastId():
     sql = 'select id from users order by id desc limit 1'
     mycur.execute(sql)
     return mycur.fetchone()
+
+def getViolatorsList():
+    nowtime = datetime.now()
+    formated_date = nowtime.strftime('%Y-%m-%d %H:%M:%S')
+    sql = 'select u.id, u.uname from users as u, violators as v where datediff(v._datetime, %s) = 0 and v.uid = u.id order by u.id asc'
+    mycur.execute(sql, (formated_date, ))
+    return mycur.fetchall()
