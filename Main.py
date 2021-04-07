@@ -21,7 +21,6 @@ while True:
             name = ""
             if id != 0:
                 name = getUserName(id)[0]
-                print('Inserting data...')
                 insertInViolator(id)
             else:
                 name = "Unknown"

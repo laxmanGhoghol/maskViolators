@@ -7,7 +7,7 @@ import numpy as np
 encodedfacesknown = getencodes()
 
 def recognize(face):
-    name = 0
+    name = -1
     try:
 
         face = cv2.cvtColor(face, cv2.COLOR_BGR2RGB)
@@ -19,4 +19,7 @@ def recognize(face):
             name = matchIndex
     except:
         print("Error recognizing face...")
-    return name+1
+    if name == -1:
+        return 0
+    else:
+        return name+1
