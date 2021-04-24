@@ -1,5 +1,6 @@
 .vscode
 .ipynb_checkpoints
 __pycache__
+mobilenet_v2.model
 mask_dataset
 images
