@@ -6,7 +6,7 @@ from recognizer import recognize
 from dbconn import insertInViolator,getUserName
 cam = cv2.VideoCapture(0)
 
-print('Starting application...')
+print('Starting application... press q to stop')
 while True:
     _, frame = cam.read()
     
